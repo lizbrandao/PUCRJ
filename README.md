@@ -94,9 +94,9 @@ Na análise por artista, considerando os streams das músicas às quais cada art
 
 Foi observada associação positiva entre presença em playlists e volume de streams.
 
-A relação foi mais forte para playlists do Spotify, com correlação próxima de **0,79**, seguida pelas playlists da Apple Music e Deezer. As associações encontradas para charts foram mais fracas.
+A relação foi mais forte para playlists do Spotify, com correlação de aproximadamente **0,79**, seguida pelas playlists da Apple Music, com aproximadamente **0,77**, e do Deezer, com aproximadamente **0,60**.
 
-Esses resultados representam associação entre as variáveis e não permitem concluir causalidade.
+As associações encontradas para charts foram mais fracas. Esses resultados representam associação entre as variáveis e não permitem concluir causalidade.
 
 ### P3 — Desempenho por período de lançamento
 
@@ -124,11 +124,13 @@ Os resultados indicam que uma parcela relativamente pequena das músicas concent
 
 Foi testado o enriquecimento dos dados utilizando o **MusicBrainz**.
 
-Três músicas foram utilizadas para validar a integração: **Blinding Lights**, **Shape of You** e **As It Was**. As três foram corretamente identificadas, com `score_matching` igual a **100**.
+No teste realizado, **Shape of You**, de Ed Sheeran, e **As It Was**, de Harry Styles, foram localizadas com `score_matching` igual a **100** e receberam identificadores MBID. Para **Blinding Lights**, de The Weeknd, a execução mais recente não retornou correspondência válida, permanecendo `mbid`, `score_matching` e `titulo_encontrado` como nulos.
 
-Entretanto, a disponibilidade de avaliações foi insuficiente. **Blinding Lights** e **Shape of You** apresentaram **0 votos**, enquanto **As It Was** apresentou **rating 5 com apenas 1 voto**.
+Entretanto, a consulta das avaliações mostrou cobertura insuficiente para sustentar a análise proposta. **Blinding Lights não apresentou avaliação disponível nem quantidade de votos informada, Shape of You não possuía avaliação e apresentava 0 votos, enquanto As It Was apresentou rating 5 com apenas 1 voto.**
 
-Dessa forma, a P6 não foi respondida quantitativamente. A limitação foi documentada em vez de produzir uma conclusão não sustentada pelos dados.
+Diante desse resultado, a coleta não foi ampliada para as demais músicas da base. Embora o relacionamento técnico entre as fontes tenha funcionado para parte do teste realizado, a quantidade de avaliações disponível não oferece evidência suficiente para representar de forma confiável a recepção dos usuários.
+
+Por esse motivo, a sexta pergunta não foi respondida quantitativamente. A tentativa de enriquecimento foi mantida como parte do pipeline para registrar tanto a viabilidade técnica parcial da integração quanto a limitação encontrada na fonte externa, evitando produzir uma associação entre popularidade e avaliação baseada em dados insuficientes.
 
 ## Autoavaliação
 
@@ -136,11 +138,24 @@ O pipeline permitiu percorrer as principais etapas previstas para o MVP: ingest�
 
 As cinco primeiras perguntas puderam ser respondidas com os dados disponíveis. A sexta exigia enriquecimento externo e foi mantida até o final para avaliação de sua viabilidade.
 
-A integração com o MusicBrainz mostrou que a correspondência entre música e artista era tecnicamente possível, mas a baixa cobertura das avaliações impediu uma análise quantitativa consistente.
+A integração com o MusicBrainz mostrou que o relacionamento entre música e artista era tecnicamente possível para parte do teste realizado, mas a baixa cobertura das avaliações impediu uma análise quantitativa consistente.
 
 Entre as limitações do projeto também estão a composição do dataset, que reúne músicas de destaque e não representa o universo completo de lançamentos, e a documentação da fonte principal, que informa a utilização de múltiplas fontes sem detalhá-las individualmente.
 
 Como evolução, o projeto poderá incorporar uma fonte externa com maior cobertura de avaliações, ampliar o universo e período das músicas analisadas e automatizar verificações adicionais de qualidade e atualização dos dados.
+
+## Evidências de Execução e Resultados
+
+As evidências complementares do projeto documentam:
+
+- a fonte, proveniência e licença dos dados;
+- a linhagem **Kaggle → CSV → GitHub → Bronze → Silver → Gold → Análises**;
+- verificações e tratamentos de qualidade;
+- verificações de consistência entre músicas e artistas;
+- persistência das dimensões, bridge e tabela fato da camada Gold;
+- resultados das análises correspondentes às perguntas P1 a P6.
+
+O documento complementar de evidências reúne screenshots produzidos durante a execução do MVP e recortados para preservar as informações relevantes do processo e dos resultados.
 
 ## Arquivos do Repositório
 
@@ -149,3 +164,5 @@ O notebook final do MVP é:
 `00_MVP_Engenharia_Dados_Spotify_27092026_vF.ipynb`
 
 Ele contém o código executável, documentação do pipeline, evidências das tabelas persistidas, catálogo de dados e resultados das análises.
+
+O documento complementar em PDF reúne as evidências visuais de execução e resultados do MVP.
